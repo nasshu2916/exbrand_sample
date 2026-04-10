@@ -20,7 +20,10 @@ config :exbrand_sample, ExbrandSampleWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "8vNClJk2MX5iV70ql7D0GRdJrWCuvypZ+mO/2QmNWE0C8TtC8VYokmFA29oFSXxl"
+  secret_key_base: "8vNClJk2MX5iV70ql7D0GRdJrWCuvypZ+mO/2QmNWE0C8TtC8VYokmFA29oFSXxl",
+  watchers: [
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+  ]
 
 # ## SSL Support
 #

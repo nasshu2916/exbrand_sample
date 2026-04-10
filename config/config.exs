@@ -11,6 +11,16 @@ config :exbrand_sample,
   ecto_repos: [ExbrandSample.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :tailwind,
+  version: "4.1.12",
+  default: [
+    args: ~w(
+      --input=assets/css/app.css
+      --output=priv/static/assets/app.css
+    ),
+    cd: Path.expand("..", __DIR__)
+  ]
+
 # Configure the endpoint
 config :exbrand_sample, ExbrandSampleWeb.Endpoint,
   url: [host: "localhost"],

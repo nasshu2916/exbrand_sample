@@ -48,6 +48,7 @@ defmodule ExbrandSample.MixProject do
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 1.1.0"},
+      {:tailwind, "~> 0.4", runtime: Mix.env() == :dev},
       {:lazy_html, ">= 0.1.0", only: :test},
       {:jason, "~> 1.2"},
       {:bandit, "~> 1.5"}
@@ -62,11 +63,17 @@ defmodule ExbrandSample.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
+      setup: ["deps.get", "tailwind.install --if-missing", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
+      precommit: [
+        "tailwind default --minify",
+        "compile --warnings-as-errors",
+        "deps.unlock --unused",
+        "format",
+        "test"
+      ]
     ]
   end
 end
