@@ -1,18 +1,52 @@
 # ExbrandSample
 
-To start your Phoenix server:
+`examples/customer_portal` の機能を移植した Phoenix サンプルです。
 
-* Run `mix setup` to install and setup dependencies
-* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## 前提
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+`ex_brand` をローカル依存として参照します。
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+```text
+~/src/
+  exbrand/
+  exbrand_sample/
+```
 
-## Learn more
+## セットアップ
 
-* Official website: https://www.phoenixframework.org/
-* Guides: https://hexdocs.pm/phoenix/overview.html
-* Docs: https://hexdocs.pm/phoenix
-* Forum: https://elixirforum.com/c/phoenix-forum
-* Source: https://github.com/phoenixframework/phoenix
+```bash
+mise install
+mise run setup
+```
+
+## 起動
+
+```bash
+mise run server
+```
+
+## マイグレーション
+
+適用:
+
+```bash
+mise run migrate
+```
+
+リセット:
+
+```bash
+mise run reset
+```
+
+追加:
+
+```bash
+mix ecto.gen.migration add_some_feature
+```
+
+## 検証
+
+```bash
+mise run precommit
+```

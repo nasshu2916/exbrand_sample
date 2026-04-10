@@ -6,6 +6,14 @@ elixir = "1.19.5-otp-28"
 description = "Install dependencies and set up the database"
 run = "mix setup"
 
+[tasks.migrate]
+description = "Run Ecto migrations"
+run = "mix ecto.migrate"
+
+[tasks.reset]
+description = "Drop and recreate the database"
+run = "mix ecto.reset"
+
 [tasks.server]
 description = "Start the Phoenix server"
 run = "mix phx.server"

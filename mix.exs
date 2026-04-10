@@ -40,6 +40,7 @@ defmodule ExbrandSample.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:ex_brand, path: "../exbrand"},
       {:phoenix, "~> 1.8.5"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.13"},

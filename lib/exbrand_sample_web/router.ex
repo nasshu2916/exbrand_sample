@@ -20,8 +20,10 @@ defmodule ExbrandSampleWeb.Router do
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ExbrandSampleWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", ExbrandSampleWeb do
+    pipe_through :api
+
+    get "/users", UserController, :index
+    post "/users", UserController, :create
+  end
 end
