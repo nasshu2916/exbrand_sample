@@ -1,0 +1,19 @@
+[tools]
+erlang = "28.4.1"
+elixir = "1.19.5-otp-28"
+
+[tasks.setup]
+description = "Install dependencies and set up the database"
+run = "mix setup"
+
+[tasks.server]
+description = "Start the Phoenix server"
+run = "mix phx.server"
+
+[tasks.iex]
+description = "Start the development environment"
+run = "iex -S mix phx.server"
+
+[tasks.precommit]
+description = "Format, compile, and test the project"
+run = "mix precommit"
