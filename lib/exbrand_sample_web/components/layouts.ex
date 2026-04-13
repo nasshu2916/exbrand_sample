@@ -49,9 +49,13 @@ defmodule ExbrandSampleWeb.Layouts do
 
   def flash_group(assigns) do
     ~H"""
-    <div id={@id} aria-live="polite">
-      <.flash kind={:info} flash={@flash} />
-      <.flash kind={:error} flash={@flash} />
+    <div
+      id={@id}
+      aria-live="polite"
+      class="pointer-events-none fixed inset-x-0 top-0 z-50 mx-auto flex max-w-5xl flex-col gap-3 px-4 pt-4 sm:px-6"
+    >
+      <.flash kind={:info} flash={@flash} title="Info" class="pointer-events-auto" />
+      <.flash kind={:error} flash={@flash} title="Error" class="pointer-events-auto" />
     </div>
     """
   end

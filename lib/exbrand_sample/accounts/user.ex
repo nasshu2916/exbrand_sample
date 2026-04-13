@@ -29,8 +29,24 @@ defmodule ExbrandSample.Accounts.User do
 
   @spec changeset(t(), map()) :: Ecto.Changeset.t()
   def changeset(user, attrs) do
+    normalized_attrs = normalize_user_id(attrs)
+
     user
-    |> cast(attrs, [:user_id, :email, :nickname, :status])
+    |> cast(normalized_attrs, [:user_id, :email, :nickname, :status])
     |> validate_required([:user_id, :email, :nickname, :status])
+    |> unique_constraint(:user_id)
+    |> unique_constraint(:email)
+  end
+
+  # HTML form の number input は文字列で届くため、integer cast を先に通す。
+  defp normalize_user_id(%{} = attrs) do
+    changeset =
+      {%{}, %{user_id: :integer}}
+      |> cast(attrs, [:user_id])
+
+    case fetch_change(changeset, :user_id) do
+      {:ok, user_id} -> Map.put(attrs, "user_id", user_id)
+      :error -> attrs
+    end
   end
 end

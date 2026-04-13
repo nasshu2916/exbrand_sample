@@ -1,0 +1,100 @@
+<Layouts.app flash={@flash}>
+  <section>
+    <div class="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+      <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="m-0 text-[12px] font-bold uppercase tracking-[0.24em] text-zinc-500">Users</p>
+          <h1 class="mt-3 text-3xl font-semibold tracking-[-0.04em] text-zinc-950">ユーザ一覧</h1>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href={~p"/users/new"}
+            class="inline-flex items-center justify-center rounded-lg border border-zinc-900 bg-zinc-900 px-4 py-2 text-sm font-semibold text-white"
+          >
+            ユーザ登録
+          </a>
+          <a
+            href={~p"/"}
+            class="inline-flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold text-zinc-700"
+          >
+            トップへ戻る
+          </a>
+        </div>
+      </div>
+
+      <div class="mb-4 text-sm text-zinc-500">{length(@users)} users</div>
+
+      <div class="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+        <%= if @users == [] do %>
+          <div class="px-6 py-16 text-center">
+            <p class="text-base font-semibold">ユーザはまだ登録されていません。</p>
+            <div class="mt-6 flex justify-center">
+              <a
+                href={~p"/users/new"}
+                class="inline-flex items-center justify-center rounded-lg border border-zinc-900 bg-zinc-900 px-4 py-2 text-sm font-semibold text-white"
+              >
+                ユーザ登録へ進む
+              </a>
+            </div>
+          </div>
+        <% else %>
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[760px] border-collapse">
+              <thead class="bg-zinc-50">
+                <tr>
+                  <th class="border-b border-zinc-200 px-6 py-4 text-left text-[12px] font-bold uppercase tracking-[0.22em] text-zinc-500">
+                    ID
+                  </th>
+                  <th class="border-b border-zinc-200 px-6 py-4 text-left text-[12px] font-bold uppercase tracking-[0.22em] text-zinc-500">
+                    ユーザ
+                  </th>
+                  <th class="border-b border-zinc-200 px-6 py-4 text-left text-[12px] font-bold uppercase tracking-[0.22em] text-zinc-500">
+                    状態
+                  </th>
+                  <th class="border-b border-zinc-200 px-6 py-4 text-left text-[12px] font-bold uppercase tracking-[0.22em] text-zinc-500">
+                    操作
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= for user <- @users do %>
+                  <tr>
+                    <td class="border-b border-zinc-200 px-6 py-4 align-top">{user_id(user)}</td>
+                    <td class="border-b border-zinc-200 px-6 py-4 align-top">
+                      <a
+                        href={~p"/users/#{user.user_id}"}
+                        class="text-sm font-semibold underline underline-offset-4"
+                      >
+                        {nickname(user)}
+                      </a>
+                      <p class="mt-1 break-all text-sm text-zinc-500">{email(user)}</p>
+                    </td>
+                    <td class="border-b border-zinc-200 px-6 py-4 align-top">
+                      <.status_badge status={user.status} />
+                    </td>
+                    <td class="border-b border-zinc-200 px-6 py-4 align-top">
+                      <div class="flex flex-wrap gap-2">
+                        <a
+                          href={~p"/users/#{user.user_id}"}
+                          class="inline-flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-sm font-semibold text-zinc-700"
+                        >
+                          詳細
+                        </a>
+                        <a
+                          href={~p"/users/#{user.user_id}/edit"}
+                          class="inline-flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-sm font-semibold text-zinc-700"
+                        >
+                          編集
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</Layouts.app>

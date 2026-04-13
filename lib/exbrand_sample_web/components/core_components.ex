@@ -23,22 +23,40 @@ defmodule ExbrandSampleWeb.CoreComponents do
   def flash(assigns) do
     assigns = assign_new(assigns, :id, fn -> "flash-#{assigns.kind}" end)
 
+    assigns =
+      assign(
+        assigns,
+        :classes,
+        if(assigns.kind == :info,
+          do: "border-emerald-200 bg-emerald-50 text-emerald-900",
+          else: "border-rose-200 bg-rose-50 text-rose-900"
+        )
+      )
+
     ~H"""
     <div
       :if={msg = render_slot(@inner_block) || Phoenix.Flash.get(@flash, @kind)}
       id={@id}
       data-flash
       role="alert"
-      class="flash"
+      class={[
+        "w-full rounded-xl border px-4 py-3 shadow-sm",
+        @classes
+      ]}
       {@rest}
     >
-      <div>
+      <div class="flex items-start justify-between gap-3">
         <div>
-          <p :if={@title} class="font-semibold">{@title}</p>
-          <p>{msg}</p>
+          <p :if={@title} class="text-sm font-semibold">{@title}</p>
+          <p class="text-sm leading-6">{msg}</p>
         </div>
-        <button type="button" aria-label="close">
-          Close
+        <button
+          type="button"
+          aria-label="close"
+          onclick="this.closest('[data-flash]').remove()"
+          class="shrink-0 rounded-md px-2 py-1 text-xs font-semibold text-current/70 hover:bg-black/5 hover:text-current"
+        >
+          閉じる
         </button>
       </div>
     </div>

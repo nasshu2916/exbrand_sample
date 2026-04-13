@@ -3,6 +3,6 @@ defmodule ExbrandSampleWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "最低限の Phoenix サンプル"
+    assert html_response(conn, 200) =~ "ユーザ管理サンプル"
   end
 end

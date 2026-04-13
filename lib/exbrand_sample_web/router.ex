@@ -18,12 +18,24 @@ defmodule ExbrandSampleWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/users", UserPageController, :index
+    get "/users/new", UserPageController, :new
+    post "/users", UserPageController, :create
+    get "/users/:user_id", UserPageController, :show
+    get "/users/:user_id/edit", UserPageController, :edit
+    put "/users/:user_id", UserPageController, :update
+    patch "/users/:user_id", UserPageController, :update
+    delete "/users/:user_id", UserPageController, :delete
   end
 
   scope "/api", ExbrandSampleWeb do
     pipe_through :api
 
     get "/users", UserController, :index
+    get "/users/:user_id", UserController, :show
     post "/users", UserController, :create
+    put "/users/:user_id", UserController, :update
+    patch "/users/:user_id", UserController, :update
+    delete "/users/:user_id", UserController, :delete
   end
 end
