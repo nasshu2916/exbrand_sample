@@ -1,10 +1,11 @@
 # ExbrandSample
 
-`examples/customer_portal` の機能を移植した Phoenix サンプルです。
+This is a Phoenix sample application for
+[`exbrand`](https://github.com/nasshu2916/exbrand).
 
-## 前提
+## Prerequisites
 
-`ex_brand` をローカル依存として参照します。
+This project references `ex_brand` as a local dependency.
 
 ```text
 ~/src/
@@ -12,40 +13,40 @@
   exbrand_sample/
 ```
 
-## セットアップ
+## Setup
 
 ```bash
 mise install
 mise run setup
 ```
 
-## 起動
+## Run
 
 ```bash
 mise run server
 ```
 
-## マイグレーション
+## Migrations
 
-適用:
+Apply:
 
 ```bash
 mise run migrate
 ```
 
-リセット:
+Reset:
 
 ```bash
 mise run reset
 ```
 
-追加:
+Create a new migration:
 
 ```bash
 mix ecto.gen.migration add_some_feature
 ```
 
-## 検証
+## Validation
 
 ```bash
 mise run precommit
